@@ -106,7 +106,6 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
-        /* Kıvılcım Stili */
         .spark {
             position: absolute;
             width: 8px;
@@ -128,7 +127,6 @@
                 transform: scale(0);
             }
         }
-        /* Fade In Animation */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -137,7 +135,6 @@
                 opacity: 1;
             }
         }
-        /* Footer Stili */
         footer {
             position: absolute;
             bottom: 5px;
@@ -163,7 +160,7 @@
 
     <div class="button-container">
         <button onclick="generatePromoCodes()">Generate Codes</button>
-        <button onclick="copyAllCodes()">Copy All</button> <!-- Yeni Buton -->
+        <button onclick="copyAllCodes()">Copy All</button>
     </div>
 
     <div id="generated-codes"></div>
@@ -176,9 +173,8 @@
     <iframe class="spotify-widget" src="https://open.spotify.com/embed/track/2ll7k2hZR96MICsYwQS7hO?si=1ec64a3d01e54d0f" allowtransparency="true" allow="encrypted-media"></iframe>
 
     <script>
-        // Kıvılcım Efekti
         document.addEventListener('mousemove', (e) => {
-            for (let i = 0; i < 10; i++) { // Kıvılcım sayısını arttırdık
+            for (let i = 0; i < 10; i++) {
                 const spark = document.createElement('div');
                 spark.className = 'spark';
                 spark.style.left = e.pageX + 'px';
@@ -186,7 +182,7 @@
                 document.body.appendChild(spark);
                 setTimeout(() => {
                     spark.remove();
-                }, 500); // Kıvılcım süresini kısalttık
+                }, 500);
             }
         });
 
@@ -195,7 +191,7 @@
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             const promoBaseUrl = 'https://promos.discord.gg/';
             const codesContainer = document.getElementById('generated-codes');
-            codesContainer.innerHTML = ''; // Önceki kodları temizle
+            codesContainer.innerHTML = '';
 
             let generatedCodes = '';
 
@@ -204,7 +200,7 @@
                 for (let j = 0; j < 24; j++) {
                     code += characters.charAt(Math.floor(Math.random() * characters.length));
                 }
-                generatedCodes += `${promoBaseUrl}${code}\n`; // Her kodu yeni satıra ekleyin
+                generatedCodes += `${promoBaseUrl}${code}\n`;
             }
 
             codesContainer.innerHTML = generatedCodes.split('\n').filter(line => line.trim() !== '').map(code => `<p><a href="${code}" target="_blank">${code}</a></p>`).join('');
@@ -212,7 +208,7 @@
 
         function copyAllCodes() {
             const codesContainer = document.getElementById('generated-codes');
-            const textToCopy = Array.from(codesContainer.querySelectorAll('p a')).map(a => a.href).join('\n'); // Kodları birleştir ve boşluk bırakmadan
+            const textToCopy = Array.from(codesContainer.querySelectorAll('p a')).map(a => a.href).join('\n');
             navigator.clipboard.writeText(textToCopy).then(() => {
                 alert('All codes copied to clipboard!');
             }).catch(err => {
