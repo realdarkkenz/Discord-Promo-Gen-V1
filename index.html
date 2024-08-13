@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Nitro Promo Generator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://wallpapercave.com/wp/wp6512041.png') no-repeat center center;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-attachment: fixed;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 2s ease-out;
+        }
+        .discord-image-link {
+            display: block;
+            width: 200px;
+            height: 200px;
+            background: url('https://images-ext-1.discordapp.net/external/xqkjvYm0Wv3xLUUEC-TQj1FpFxmrJH35QwNOPo6Lesk/%3Fsize%3D1024/https/cdn.discordapp.com/icons/1140681007197073468/af0173d31f097a37e06c8a1ee6ba283d.png?format=webp&quality=lossless&width=473&height=473') no-repeat center center;
+            background-size: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .discord-image-link:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 6px;
+            border: 2px solid #7289da;
+            font-size: 1em;
+            width: 50%;
+            max-width: 250px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            background-color: #7289da;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #5b6eae;
+            transform: scale(1.05);
+        }
+        #generated-codes {
+            margin-top: 15px;
+            padding: 15px;
+            border: 2px solid #7289da;
+            border-radius: 12px;
+            background-color: rgba(35, 39, 42, 0.8);
+            width: 50%;
+            max-height: 200px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        #generated-codes p {
+            margin: 3px 0;
+            word-wrap: break-word;
+            color: #ffffff;
+        }
+        a {
+            color: #7289da;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .spotify-widget {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 380px;
+            border: none;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        /* Kıvılcım Stili */
+        .spark {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #f1c40f, rgba(241, 196, 15, 0));
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0);
+            animation: spark 0.5s ease-out forwards;
+        }
+        @keyframes spark {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* Footer Stili */
+        footer {
+            position: absolute;
+            bottom: 5px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #ffffff;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 3px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://discord.gg/j4jgo" class="discord-image-link" target="_blank"></a>
+
+    <h1>Discord Nitro Promo Generator</h1>
+
+    <label for="code-amount">Enter Number of Codes:</label>
+    <input type="number" id="code-amount" value="1" min="1" max="100">
+
+    <div class="button-container">
+        <button onclick="generatePromoCodes()">Generate Codes</button>
+        <button onclick="copyAllCodes()">Copy All</button> <!-- Yeni Buton -->
+    </div>
+
+    <div id="generated-codes"></div>
+
+    <footer>
+        @Coded By: DARK KENZ
+    </footer>
+
+    <!-- Spotify Widget -->
+    <iframe class="spotify-widget" src="https://open.spotify.com/embed/track/2ll7k2hZR96MICsYwQS7hO?si=1ec64a3d01e54d0f" allowtransparency="true" allow="encrypted-media"></iframe>
+
+    <script>
+        // Kıvılcım Efekti
+        document.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 10; i++) { // Kıvılcım sayısını arttırdık
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = e.pageX + 'px';
+                spark.style.top = e.pageY + 'px';
+                document.body.appendChild(spark);
+                setTimeout(() => {
+                    spark.remove();
+                }, 500); // Kıvılcım süresini kısalttık
+            }
+        });
+
+        function generatePromoCodes() {
+            const amount = parseInt(document.getElementById('code-amount').value);
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const promoBaseUrl = 'https://promos.discord.gg/';
+            const codesContainer = document.getElementById('generated-codes');
+            codesContainer.innerHTML = ''; // Önceki kodları temizle
+
+            let generatedCodes = '';
+
+            for (let i = 1; i <= amount; i++) {
+                let code = '';
+                for (let j = 0; j < 24; j++) {
+                    code += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                generatedCodes += ${promoBaseUrl}${code}\n; // Her kodu yeni satıra ekleyin
+            }
+
+            codesContainer.innerHTML = generatedCodes.split('\n').filter(line => line.trim() !== '').map(code => <p><a href="${code}" target="_blank">${code}</a></p>).join('');
+        }
+
+        function copyAllCodes() {
+            const codesContainer = document.getElementById('generated-codes');
+            const textToCopy = Array.from(codesContainer.querySelectorAll('p a')).map(a => a.href).join('\n'); // Kodları birleştir ve boşluk bırakmadan
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('All codes copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy codes!');
+            });
+        }
+    </script>
+
+</body>
+</html>
