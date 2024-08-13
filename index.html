@@ -204,10 +204,10 @@
                 for (let j = 0; j < 24; j++) {
                     code += characters.charAt(Math.floor(Math.random() * characters.length));
                 }
-                generatedCodes += ${promoBaseUrl}${code}\n; // Her kodu yeni satıra ekleyin
+                generatedCodes += `${promoBaseUrl}${code}\n`; // Her kodu yeni satıra ekleyin
             }
 
-            codesContainer.innerHTML = generatedCodes.split('\n').filter(line => line.trim() !== '').map(code => <p><a href="${code}" target="_blank">${code}</a></p>).join('');
+            codesContainer.innerHTML = generatedCodes.split('\n').filter(line => line.trim() !== '').map(code => `<p><a href="${code}" target="_blank">${code}</a></p>`).join('');
         }
 
         function copyAllCodes() {
